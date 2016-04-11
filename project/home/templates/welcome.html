@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title%} Welcome {% endblock title %}
+
+{% block content%}
+    <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                {% for message in get_flashed_messages() %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page-header">
+                <h1 class="sredisnko">Welcome! :) </h1>
+            </div>
+        </div>
+    </div>
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Dobrodošli - Welcome
+            </div>
+            <div class="panel-body">
+                <p>
+                    Maecenas tempor fringilla enim, vitae egestas nunc mollis sed. Nam eu lorem
+                    convallis justo maximus efficitur quis vel elit. Aenean tempus euismod purus non
+                    eleifend. In lorem velit, egestas vel mauris et, ullamcorper dignissim risus.
+                    Pellentesque dui nunc, pharetra feugiat urna ac, luctus elementum sapien.
+                    Curabitur finibus convallis ligula et finibus. Quisque vestibulum, leo eget facilisis
+                    iaculis, magna mi cursus nibh, nec ornare purus turpis in diam. In felis velit, dapibus
+                    eu blandit vitae, tristique in dui. Donec finibus elit at est varius consequat. Etiam euismod
+                    vehicula sem, vitae pretium elit feugiat quis. Cras dictum enim id neque dictum malesuada.
+                    Praesent vel porttitor est, ac placerat velit. Integer ut auctor sem.
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+

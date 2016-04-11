@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %} Home{% endblock title %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="page-header">
+                <h1>Hi there this is a Homepage! </h1>
+                <p>
+                    Res je to bo naslovna stran aplikacije :)
+                </p>
+            </div>
+        </div>
+    </div>
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        {% for message in get_flashed_messages() %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Podatki o Vremenu v Cerknem
+                </div>
+                <div class="panel-body">
+                    <p>
+                        <span class="krepko">Temperatura: </span> {{ weather.main.temp}} °C
+                    </p>
+                    <p>
+                        <span class="krepko">Valga: </span> {{ weather.main.humidity}} %
+                    </p>
+                    <p>
+                        <span class="krepko">Zračni tlak: </span> {{ weather.main.pressure }} milibarov
+                    </p>
+                    <p>
+                        <span class="krepko">Opis: </span> {{ weather.weather[0].description }}
+                    </p>
+
+                </div>
+            </div>
+        </div>
+            <div class="col-sm-6">
+                <h2>Aktualno</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis lorem at posuere pulvinar.
+                    Donec sed sem dolor. Aliquam eu congue ex, at elementum tortor. Donec eget nibh venenatis,
+                    ultricies urna a, tempus dui. Vivamus gravida mattis ligula, ac cursus lacus placerat sed.
+                    Sed tempor velit tincidunt, placerat est egestas, viverra odio. Donec eros sem, imperdiet id odio
+                    quis, tempus dignissim lacus. Donec consectetur, urna et porttitor pretium, dui ex viverra nulla, a
+                    cursus sapien risus sit amet est. Morbi pharetra nisi erat, sed suscipit eros pharetra non.
+                    Nam ornare pulvinar varius. Aliquam ac posuere ex, non condimentum enim.
+                </p>
+                <p>
+                  Suspendisse dapibus egestas aliquam. Duis sodales lacus vitae felis aliquet cursus. Vestibulum
+                    ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut tincidunt libero
+                    quis eros pulvinar interdum. Ut efficitur eros quis urna pharetra, commodo vestibulum
+                    quam porttitor. Donec malesuada aliquam mi vel hendrerit. Fusce laoreet magna vel dolor
+                    convallis, ut molestie eros commodo. In tempus eu nisl pellentesque ultrices.
+                </p>
+                <p>
+                   Maecenas et mattis nisi. Praesent in venenatis risus. Aenean aliquet risus sit amet diam
+                    tincidunt vehicula. Aenean vitae luctus metus. Nulla pellentesque, ex eu suscipit maximus,
+                    mi magna consequat nunc, id egestas felis dolor at lacus. Pellentesque commodo finibus purus,
+                    sed pellentesque mauris egestas ac. Aliquam ut metus odio. Donec in enim molestie, faucibus
+                    purus vulputate, porttitor nunc. Maecenas at sapien et sem accumsan porta. Curabitur ut massa
+                    tristique, ornare arcu sit amet, rhoncus elit. Vivamus velit risus, ornare vitae efficitur nec,
+                    malesuada sit amet erat. Pellentesque volutpat sem ac rhoncus rhoncus.
+                </p>
+
+            </div>
+        <div class="col-sm-3">
+            <table class="table table-bordered table-responsive table-striped">
+            <thead>
+            <tr class="glava">
+                <th>Naslov</th>
+                <th>Avtor</th>
+            </tr>
+            </thead>
+            <tbody class="bg-info">
+                {% for post in posts %}
+                    <tr>
+                        <td><a href="{{url_for('blog.blog_details', post_id=post.id)}}">{{ post.title }}</a></td>
+                        <td>{{ post.author.name }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+
+{% endblock content %}
+
+

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %} Login {% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <div class="page-header">
+            <h1>Priavi se!</h1>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        {% for message in get_flashed_messages() %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% if error %}
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="alert alert-warning">
+                <p>
+                    <span class="krepko">Opozorilo: </span> {{error}}
+                </p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <p>
+                <form action="" method="post" class="from-horizontal">
+                    {{ form.csrf_token }}
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Uporabnik</label>
+                        <div class="col-sm-8">
+                            {{ form.username(placeholder="uporabnik", class="form-control") }}
+                        {% if form.username.errors %}
+                            {% for error in form.username.errors %}
+                                <span class="krepko text-danger" > {{ error}}</span>
+                            {% endfor %}
+                        {% endif %}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Geslo</label>
+                        <div class="col-sm-8">
+                            {{ form.password(placeholder="geslo", class="form-control") }}
+                            {% if form.password.errors %}
+                                {% for error in form.password.errors %}
+                                    <span class="krepko text-danger"> {{ error}}</span>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-success">
+                        Prijavi se
+                    </button>
+                </form>
+                <br>
+            </p>
+        </div>
+    </div>
+ </div>
+{% endblock content %}

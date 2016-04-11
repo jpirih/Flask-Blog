@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Podrobnosti objave
+{% endblock title %}
+
+{% block heading %}
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <div class="page-header">
+            <h1>{{ post.title }}</h1>
+        </div>
+    </div>
+</div>
+{%  endblock heading %}
+
+{% block content %}
+{% for message in get_flashed_messages() %}
+     <div class="row">
+         <div class="col-sm-6 col-sm-offset-3">
+             <div class="alert alert-success">
+                 <span class="glyphicon glyphicon-ok"></span> 
+                 {{ message }}
+             </div>
+         </div>
+     </div>
+{% endfor %}
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <p>
+                    <span class="krepko">Objavljeno:</span> {{ objavljeno }}
+                </p>
+                <p>
+                    <span class="krepko">Avtor:</span> {{ post.author.name }}
+                </p>
+                <p>
+                    <span class="krepko">Vsebina: </span> {{ post.description }}
+                </p>
+                <hr />
+                <a href="{{ url_for('blog.blog_home') }}" class="btn btn-danger">Nazaj</a>
+            </div>
+        </div>
+        <h2>Komentarji</h2>
+        {% if comments|length == 0 %}
+            <div class="alert alert-info">
+                <span class="glyphicon glyphicon-info-sign"></span>
+                Za to objavo ni komentarjev Bodi porvi in napiši komentar
+            </div>
+        {% else %}
+            {% for comment in comments %}
+                <div class="well">
+                    <h3>{{ comment.title }}</h3>
+                    <p>
+                        <span class="text-muted">avtor: </span> {{ comment.commentator.name}}
+                        <span class="text-muted">datum: </span> {{ comment.created_at }}
+
+                    </p>
+                    <p>
+                        {{ comment.content}}
+                    </p>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <hr>
+    <h3>Tvoj komentar </h3>
+    <form action="{{ url_for('blog.create_commment', post_id=post.id)}}" method="post">
+            {{ form.csrf_token}}
+            <div class="form-group">
+                <label>Zadeva</label>
+                {{ form.title(class="form-control") }}
+                {% if form.title.errors %}
+                    {% for error in form.title.errors %}
+                        <span class="krepko text-danger"> {{ error}}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label>Komentar </label>
+                {{ form.content(class="form-control")}}
+                {% if form.content.errors %}
+                    {% for error in form.content.errors %}
+                        <span class="krepko text-danger"> {{ error}}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <br>
+            <div class="form-group">
+
+                <button type="submit" class="btn  btn-success">
+                    Shrani Objavo
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock content %}

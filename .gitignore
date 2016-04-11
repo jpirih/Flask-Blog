@@ -1,0 +1,11 @@
+# Created by .ignore support plugin (hsz.mobi)
+
+.idea
+.profile
+.bashrc
+posts.db-journal
+*.pyc
+zapiski.md
+.vs
+discover-flask.pyproj
+discover-flask.sln
