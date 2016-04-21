@@ -27,6 +27,10 @@ def home():
 def welcome():
     return render_template('welcome.html')
 
+@home_blueprint.route('/contact')
+def contact():
+	return render_template('contact.html')
+
 
 
 

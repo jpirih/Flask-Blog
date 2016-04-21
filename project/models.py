@@ -5,6 +5,22 @@ from sqlalchemy import ForeignKey
 import datetime
 
 
+categories_posts = db.Table(
+    'categories_posts',
+    db.Column('category_id', db.Integer, db.ForeignKey('categories.id')),
+    db.Column('post_id', db.Integer, db.ForeignKey('posts.id')),
+    db.PrimaryKeyConstraint('post_id', 'category_id')
+)
+
+class CategoriesPosts(object):
+
+    def __init__(self, category_id, post_id):
+        self.post_id = post_id
+        self.category_id = category_id
+
+
+db.mapper(CategoriesPosts, categories_posts)
+
 class BlogPost(db.Model):
 
     __tablename__ = 'posts'
@@ -15,6 +31,8 @@ class BlogPost(db.Model):
     created_at = db.Column(db.DateTime, default= datetime.datetime.utcnow())
     author_id = db.Column(db.Integer, ForeignKey("users.id"))
     comments = relationship("Comment", backref="comments")
+    categories = db.relationship('Category', secondary=categories_posts,
+                                       backref=db.backref('posts', lazy='dynamic'))
 
     def __init__(self, title, description, author):
         self.title = title
@@ -23,6 +41,20 @@ class BlogPost(db.Model):
 
     def __repr__(self):
         return 'title {}| {}'.format(self.title, self.description)
+
+
+class Category(db.Model):
+
+    __tablename__ = 'categories'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+
+    def __init__(self, name):
+        self.name = name
+
+    def __repr__(self):
+        return self.name
 
 
 class Comment(db.Model):

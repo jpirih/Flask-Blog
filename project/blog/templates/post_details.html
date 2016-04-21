@@ -36,6 +36,12 @@
                     <span class="krepko">Avtor:</span> {{ post.author.name }}
                 </p>
                 <p>
+                    <span class="krepko">Kategorije</span>:
+                    {% for post_category in post.categories %}
+                        <span class="text-muted">{{ post_category.name }}</span>
+                    {% endfor %}
+                </p>
+                <p>
                     <span class="krepko">Vsebina: </span> {{ post.description }}
                 </p>
                 <hr />
