@@ -19,6 +19,9 @@ Poganjanje  serverja za locahost je možno preko python manage.py runserver
 vse uporabljene knjižnice so shranjene v datoreki requirements.txt
 namestite jih lahko v virtual environment pip install -r requirements.txt
 
+Podatki testna baza so shranjeni v mapi podatki in si jih lahko uvozite na svoj localhost za testiranje ...
+Podatki so sibmolični in so izmišljeni. 
+
 ## Obvestilo
 Še vedno v razvoju  se nadaljuje ... 
 
