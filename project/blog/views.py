@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import request, render_template, redirect, url_for, flash, Blueprint
 from project import db
-from flask.ext.login import login_required, current_user
+from flask_login import login_required, current_user
 from project.models import BlogPost, Comment, CategoriesPosts, Category
 from forms import CreatePostForm, CommentForm
 from project.helpers import date_time_standard
@@ -85,3 +85,25 @@ def create_post():
 
     categories = db.session.query(Category).all()
     return render_template('create_post.html',categories=categories)
+
+
+@blog_blueprint.route('/blog/dashboard', methods=['GET', 'POST'])
+def dashboard():
+    posts = db.session.query(BlogPost).order_by('created_at desc').all()
+
+    for post in posts:
+        post.created_at = date_time_standard(post.created_at)
+
+    categories = db.session.query(Category).all()
+
+    if request.method == 'POST':
+        name = request.form['name']
+        category = Category(name=name)
+
+        db. session.add(category)
+        db.session.commit()
+        flash('Kategorija dodana OK')
+
+        return redirect(url_for('blog.dashboard'))
+
+    return render_template('blog_dashboard.html', posts=posts, categories=categories)

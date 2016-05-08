@@ -13,11 +13,18 @@ Ko je uporabnik registrian ima možnost ogleda postov pisanja novih
 objav in komentiranja 
 
 ## Uporaba
-Znotraj datoteke config.py nastavite parametere za mysql 
+Znotraj datoteke config.py nastavite parametere za mysql
+Poganjanje  serverja za locahost je možno preko python manage.py runserver
+
+vse uporabljene knjižnice so shranjene v datoreki requirements.txt
+namestite jih lahko v virtual environment pip install -r requirements.txt
+
 ## Obvestilo
 Še vedno v razvoju  se nadaljuje ... 
 
 Lep pozdrav 
 
 Janko Pirih 
-Podlanišče, April 2016 
+Podlanišče, April 2016
+
+Zadnja spremeba 8.5.2016

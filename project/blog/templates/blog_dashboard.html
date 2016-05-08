@@ -6,9 +6,9 @@
 <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
             <div class="page-header">
-                <h1>Blog </h1>
+                <h1>Blog Nadzorna plošča </h1>
                 <p>
-                    Moje najrazličnejše pisarije bodo vidne tukaj spodaj :)
+                   Pregled vsega dogajanja na blogu
                 </p>
             </div>
         </div>
@@ -36,13 +36,9 @@
               <span class="glyphicon glyphicon-home"></span>
               Domov
           </a>
-          <a href="{{url_for('home.welcome')}}" type="button" class="btn btn-primary btn-lg">
+          <a href="{{url_for('blog.blog_home')}}" type="button" class="btn btn-primary btn-lg">
               <span class="glyphicon glyphicon-asterisk"></span>
-              O Aplikaciji
-          </a>
-            <a href="{{url_for('blog.dashboard')}}" type="button" class="btn btn-primary btn-lg">
-              <span class="glyphicon glyphicon-dashboard"></span>
-              Nadzorna plošča
+             Blog
           </a>
         </div>
     </div>
@@ -53,25 +49,26 @@
 <div class="row">
     {% if posts|length > 0 %}
         <div class="col-sm-8">
-            <div class="panel panel-primary">
-                <div class="panel-body">
+            <table class="table table-responsive table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Naslov</th>
+                        <th>avtor</th>
+                        <th>Objavljeno</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-info">
                     {% for post in posts %}
-                        <h2>{{ post.title }}</h2>
-                        <span class="text-muted">avtor: {{ post.author.name }}</span>
-                        <p>
-                            {{post.description }}
-                        </p>
-                        <p>
-                            <a href="/blog-post/{{ post.id}}" class="btn btn-primary">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
-                                Več
-                            </a>
-                        </p>
-                        <hr>
+                        <tr>
+                            <td><a href="/blog-post/{{ post.id}}"> {{ post.title }}</a></td>
+                            <td>{{ post.author.name }}</td>
+                            <td>{{ post.created_at }}</td>
+                        </tr>
                     {% endfor %}
-                </div>
-            </div>
+                </tbody>
+            </table>
         </div>
+
         <div class="col-sm-4">
             <div class="page-header">
                 <h2>Hitri pregled </h2>
@@ -88,6 +85,24 @@
            </div>
         </div>
     {% endif %}
+    <div class="col-sm-4">
+        <h3>Kategorije</h3>
+        <br>
+        <form action="" method="post" class="form-inline">
+            <div class="form-group">
+                <input type="text" name="name" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span> Dodaj
+            </button>
+        </form>
+        <hr>
+        <ul class="list-group">
+            {% for category in categories %}
+                <li class="list-group-item"> {{ category.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 {% endblock content %}
 
